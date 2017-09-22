@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # This script puts the machine in max-performance mode
-# MUST BE ROOT!
-# MUST BE USED ONLY ONCE AT STARTUP!
 # ONLY FOR TEGRA K1
+# MUST BE USED ONLY ONCE AT STARTUP!
+# MUST BE ROOT!
 
 # Disable GUI
 service lightdm stop;
