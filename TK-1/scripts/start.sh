@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # This script puts the machine in max-performance mode
-# ONLY FOR TEGRA K1
-# MUST BE USED ONLY ONCE AT STARTUP!
 # MUST BE ROOT!
+# MUST BE USED ONLY ONCE AT STARTUP!
+# ONLY FOR TEGRA K1
 
 # Disable GUI
 service lightdm stop;
@@ -42,4 +42,4 @@ echo 1 > override.emc/state;
 echo -1 > /proc/sys/kernel/sched_rt_runtime_us;
 
 # Disable L2 Cache Prefetcher
-insmod /ssd/work/gits/platforms/TK-1/l2_prefetch_control/l2_prefetch_control.ko
+insmod /ssd/work/gits/platforms/TK-1/modules/l2_prefetch_control/l2-prefetch-control.ko
