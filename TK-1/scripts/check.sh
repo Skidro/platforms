@@ -4,6 +4,9 @@
 # ONLY FOR TEGRA K1
 # MUST BE ROOT!
 
+# Save the current directory
+pushd . &> /dev/null;
+
 # Display cpu-quiet
 # When cpu-quiet is enabled, the cpu cores turn off by default
 # when load is low; to conserve power
@@ -47,3 +50,14 @@ cat override.emc/rate;
 printf "%-20s : " "EMC State"
 cat override.emc/state;
 printf "\n"
+
+# Display trace_printk buffer size
+printf "\n========= Total Trace Buffer Size\n"
+cd /sys/kernel/debug/tracing;
+
+printf "%-20s : " "Size"
+cat buffer_total_size_kb;
+printf "\n"
+
+# Restore the working directory
+popd &> /dev/null;

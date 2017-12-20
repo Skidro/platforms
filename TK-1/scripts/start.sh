@@ -10,6 +10,7 @@ service lightdm stop;
 
 # Mount the ssd to default location
 mount -o rw /dev/sda1 /ssd;
+sleep 1
 
 # Disable cpu-quiet
 # When cpu-quiet is enabled, the cpu cores turn off by default
@@ -42,4 +43,7 @@ echo 1 > override.emc/state;
 echo -1 > /proc/sys/kernel/sched_rt_runtime_us;
 
 # Disable L2 Cache Prefetcher
-insmod /ssd/work/gits/platforms/TK-1/modules/l2_prefetch_control/l2-prefetch-control.ko
+insmod /ssd/work/gits/platforms/TK-1/modules/l2_prefetch_control/l2-prefetch-control.ko;
+
+# Increase the trace_printk buffer size
+echo 16384 > /sys/kernel/debug/tracing/buffer_size_kb;
