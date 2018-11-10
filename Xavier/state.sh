@@ -1,9 +1,12 @@
 #!/bin/bash
 
+pBpmp=/sys/kernel/debug/bpmp
+pGpu=/sys/devices/gpu.0/devfreq/17000000.gv11b
+
 cores=`seq 0 7`
 
 # Turn on fan for safety"
-printf "%-20s: " "Fan"
+printf "%-20s: " "Fan PWM"
 cat /sys/kernel/debug/tegra_fan/target_pwm
 
 for core in ${cores[@]}; do
@@ -19,6 +22,20 @@ for core in ${cores[@]}; do
 	cat /sys/devices/system/cpu/cpu$core/cpufreq/cpuinfo_cur_freq
 	echo
 done
+
+echo "===== GPU Frequencies (Hz)"
+cat ${pGpu}/available_frequencies
+
+printf "%-20s: " "GPU Cur. Frequency"
+cat ${pGpu}/cur_freq
+echo
+
+echo "===== EMC Frequencies (Hz)"
+cat ${pBpmp}/debug/emc/possible_rates
+
+printf "%-20s: " "EMC Cur. Frequency"
+cat ${pBpmp}/debug/clk/emc/rate
+echo
 
 printf "%-20s: " "RT-Throttle"
 cat /proc/sys/kernel/sched_rt_runtime_us
